@@ -1,21 +1,22 @@
 'use client'
 
 import { useState } from 'react'
-import { LineButton } from '@/components/ui/LineButton'
 import { MedicalDisclaimer } from '@/components/ui/MedicalDisclaimer'
 
 type TabKey = 'beauty' | 'diet'
 
 const TABS: { key: TabKey; label: string }[] = [
-  { key: 'beauty', label: '美肌内服薬' },
+  { key: 'beauty', label: 'イソトレチノイン' },
   { key: 'diet',   label: 'メディカルダイエット' },
 ]
 
 const MENU_DATA: Record<TabKey, {
   description: string
+  ctaHref: string
   rows: { name: string; dose: string; target: string; price: string }[]
 }> = {
   beauty: {
+    ctaHref: 'https://www.tokyo-life-online-clinic.com/lp/002_01',
     description:
       '肌荒れ・ニキビ・皮脂の過剰分泌にお悩みの方へ。医師が処方するイソトレチノインで、本格的な肌改善を目指します。',
     rows: [
@@ -24,6 +25,7 @@ const MENU_DATA: Record<TabKey, {
     ],
   },
   diet: {
+    ctaHref: 'https://www.tokyo-life-online-clinic.com/lp/001_01',
     description:
       'GLP-1/GIP受容体作動薬「マンジャロ」で科学的に食欲をコントロール。医師の管理のもと、安全に体重管理を行います。',
     rows: [
@@ -126,7 +128,24 @@ export function MenuSection() {
           >
             {data.description}
           </p>
-          <LineButton location="menu_section" label="LINEで詳しく相談する" />
+          <a
+            href={data.ctaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              padding: '14px 32px',
+              backgroundColor: '#5BC8E8',
+              color: '#fff',
+              fontSize: 14,
+              fontWeight: 500,
+              letterSpacing: '0.08em',
+              textDecoration: 'none',
+              borderRadius: 4,
+            }}
+          >
+            詳しく見る
+          </a>
         </div>
 
         {/* Right: drug table */}
